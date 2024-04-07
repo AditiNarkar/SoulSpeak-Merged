@@ -33,7 +33,28 @@ const userSchema = new mongoose.Schema({
     },
     treatment_history : {
         type : String
-    }
+    },
+    q1 : {
+        type : String
+    },
+    q2 : {
+        type : String
+    },
+    q3 : {
+        type : String
+    },
+    q4 : {
+        type : String
+    },
+    q5 : {
+        type : String
+    },
+    q6 : {
+        type : String
+    },
+    q7 : {
+        type : String
+    },
 })
 
 const doctorSchema = new mongoose.Schema({
@@ -49,7 +70,7 @@ const doctorSchema = new mongoose.Schema({
     contact : {
         type : Number
     },
-    license_Number :  {
+    licenseNumber :  {
         type  : String
     },
     experience : {

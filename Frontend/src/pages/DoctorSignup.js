@@ -1,6 +1,54 @@
 import Navbar from "../components/Navbar";
+import { useState } from "react";
 
 const DoctorSignup = () => {
+  const [doctor, setDoctor] = useState({
+    name:"", email:"", password:"", contact: "", licenseNumber: "", experience: ""
+  })
+
+  //const navigate = useNavigate()
+  let name, value
+
+
+  const handleInputs = (e) => {
+    name = e.target.name
+    value = e.target.value
+    setDoctor({...doctor,[name]:value });
+  }
+
+
+
+  const postData = async (e) => {
+    //alert("hi")
+    e.preventDefault()
+
+    const signupURL = "http://localhost:5000/api/registerDoctor"
+
+    const {
+      name, email, password, contact, licenseNumber, experience
+    } = doctor;
+
+    const response = await fetch(signupURL, {
+      method:"POST",
+      headers: {
+        "Content-Type" : "application/json"
+      },
+      body: JSON.stringify({
+        name, email, password, contact, licenseNumber, experience
+      })
+    })
+
+    const data = await response.json()
+    if(data.status == 201){
+      alert(data.msg)
+      window.location.href="http://localhost:3000/login"
+    }   
+    else{
+      alert(data.msg)
+    }
+  }
+
+
   return (
     <div className="w-full relative [background:linear-gradient(121.5deg,_#eed8ec_23.42%,_#a8edea)] h-[750px] overflow-hidden text-center text-5xl text-rosybrown font-inter">
       <Navbar logIn="Log In" />
@@ -22,41 +70,41 @@ const DoctorSignup = () => {
               <b className="w-[140px] relative flex items-center h-[30px] shrink-0">
                 Name
               </b>
-              <input className=" w-[375px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" />
+              <input name="name" value = {doctor.name} onChange={handleInputs}className=" w-[375px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" />
             </div>
             <div className="w-[564px] bg-gray-200 h-[47px] overflow-hidden shrink-0 flex flex-row items-center justify-start p-2.5 box-border gap-[10px]">
               <b className="w-[140px] relative flex items-center h-[30px] shrink-0">
                 Email
               </b>
-              <input type="email" className="w-[375px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" />
+              <input name="email" value = {doctor.email} onChange={handleInputs} type="email" className="w-[375px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" />
             </div>
             <div className="w-[564px] bg-gray-200 h-[47px] overflow-hidden shrink-0 flex flex-row items-center justify-start p-2.5 box-border gap-[10px]">
               <b className="w-[140px] relative flex items-center h-[30px] shrink-0">
                 Password
               </b>
-              <input type="password" className="w-[375px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" />
+              <input name="password" value = {doctor.password} onChange={handleInputs} type="password" className="w-[375px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" />
             </div>
             <div className="w-[564px] bg-gray-200 h-[47px] overflow-hidden shrink-0 flex flex-row items-center justify-start p-2.5 box-border gap-[10px]">
               <b className="w-[140px] relative flex items-center h-[30px] shrink-0">
                 Contact
               </b>
-              <input className="w-[375px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" />
+              <input name="contact" value = {doctor.contact} onChange={handleInputs} className="w-[375px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" />
             </div>
             <div className="w-[564px] bg-gray-200 h-[47px] overflow-hidden shrink-0 flex flex-row items-center justify-start p-2.5 box-border gap-[10px]">
               <b className="w-[140px] relative flex items-center h-[30px] shrink-0">
                 License Number
               </b>
-              <input className="w-[375px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" />
+              <input name="licenseNumber" value = {doctor.licenseNumber} onChange={handleInputs} className="w-[375px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" />
             </div>
             <div className="w-[564px] bg-gray-200 h-[47px] overflow-hidden shrink-0 flex flex-row items-center justify-start p-2.5 box-border gap-[10px]">
               <b className="w-[140px] relative flex items-center h-[30px] shrink-0">
                 Experience (yrs)
               </b>
-              <input type="number" min="1" max="70" step="1" className="w-[375px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" />
+              <input name="experience" value = {doctor.experience} onChange={handleInputs}type="number" min="1" max="70" step="1" className="w-[375px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" />
             </div>
           </div>
         </div>
-        <button className="cursor-pointer [border:none] py-[11px] px-[43px] bg-rosybrown rounded-21xl overflow-hidden flex flex-row items-center justify-center">
+        <button onClick={postData} className="cursor-pointer [border:none] py-[11px] px-[43px] bg-rosybrown rounded-21xl overflow-hidden flex flex-row items-center justify-center">
           <b className="relative text-xl font-inter text-plum text-center">
             Sign Me Up
           </b>

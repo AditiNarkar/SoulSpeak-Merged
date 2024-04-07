@@ -7,7 +7,6 @@ exports.authenticateUser = asyncHandler(async(req,res,next) => {
  try{
      //Cookies.get('username')
     let token = req.cookies.jwtoken
-    console.log("auth: ", req.cookies)
     if(token)
     {
       console.log("auth token:" , token)
@@ -19,7 +18,9 @@ exports.authenticateUser = asyncHandler(async(req,res,next) => {
     
       }
       
+      req.token = token
       req.rootUser = rootUser
+      req.userId = rootUser._id
       // console.log("authenticate: ", rootUser)
       next()
     }
