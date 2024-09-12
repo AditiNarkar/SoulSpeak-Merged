@@ -66,9 +66,9 @@ exports.registerUser = async(req, res) => {
 }
 
 exports.registerDoctor = async(req,res) => {
-    const {name, email, password, contact, license_Number, experience} = req.body
-
-    if(!name || !email || !password || !contact || !license_Number || !experience ){
+    const {name, email, password, contact, licenseNumber, experience} = req.body
+    console.log(email)
+    if(!name || !email || !password || !contact || !licenseNumber || !experience ){
         return res.status(400).json({msg: "Please fill all fields"})
     }
 
@@ -80,7 +80,7 @@ exports.registerDoctor = async(req,res) => {
         }
 
         const newDoctor = new DOCTOR({name: name, email: email, password: password, contact: contact,
-        license_Number: license_Number, experience: experience })
+        licenseNumber: licenseNumber, experience: experience })
 
         await newDoctor.save()
 

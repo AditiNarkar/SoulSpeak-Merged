@@ -110,7 +110,7 @@ function App() {
       <Route path="/userjournal" element={<UserJournal />} />
       <Route path="/doctormypatients" element={<DoctorMyPatients />} />
       <Route path="/doctorviewreport" element={<DoctorViewReport />} />
-      <Route path="/doctorsendmessage" element={<DoctorSendMessage />} />
+      <Route path="/doctorsendmessage/*" element={<DoctorSendMessage />} />
       <Route path="/doctorjoinroom" element={<DoctorJoinRoom />} />
     </Routes>
   );
