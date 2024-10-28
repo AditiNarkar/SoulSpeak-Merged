@@ -1,4 +1,22 @@
 const Navbar1 = () => {
+  const logoutURL = "http://localhost:5000/api/logout"
+  const logout = async() => {
+   const res = await fetch(logoutURL,{
+      method:"GET",
+      headers:{
+        Accept: "application/json",
+        "Content-Type" : "application/json"
+      },
+      credentials: "include"
+    })
+    const data = await res.json()
+
+    if(res.status == 200){
+      alert(data.msg)
+      window.location.href("http://localhost:3000/")
+    }
+  }
+
   return (
     <header className="absolute top-[0px] left-[0px] bg-thistle w-[100%] overflow-hidden flex flex-row items-center justify-center py-2.5 px-0 box-border gap-[500px]">
       <img

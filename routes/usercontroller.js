@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const {google} = require('googleapis')
-const {registerUser,registerDoctor, login , sendMail} = require('../services/functions')
+const {registerUser,registerDoctor, login , sendMail, logout} = require('../services/functions')
 const {authenticateUser, authenticateDoctor} = require('../middleware/authenticate');
 const { DOCTOR, USER } = require('../model/usermodel');
 
@@ -81,10 +81,8 @@ router.get("/sendMail/:email", authenticateDoctor, async(req,res) => {
 } )
 router.post("/sendMail", async(req,res) => {
 
-    const {subject, negetive_comms, positive_comms, comments} = req.body
-    const to_mail = req.params.email
-    const from_mail = req.rootUser.email
-    console.log("Mail", to_mail)
+    const {from, to, subject, negative, positive, comments} = req.body
+    console.log(to, subject, negative, positive, comments)
     const accessToken = await oAuth2Client.getAccessToken()
 
     const transporter = nodemailer.createTransport({
@@ -99,28 +97,30 @@ router.post("/sendMail", async(req,res) => {
           accessToken : accessToken 
         },
       });
-    
 
-    if(to_mail){
+    if(to){
 
         const mailOptions = {
             from:process.env.GMAIL,
-            to: docMail,
+            to: to,
             subject: subject ,
             text: `Dear user,
 
-            You have requested a One-Time Password (OTP) and here is your OTP:.
+            You have an update from SoulSpeak owner by your therapist.
             
-            Please use this OTP within the next 5 minutes to complete your registration.
+            Negatives:
+            ${negative}
             
-            If you did not request this OTP or have any concerns, please contact our support team.
+            Positives:
+            ${positive}
             
-            Thank you for choosing Local Karobar.
+            Comments:
+            ${comments}
+
             
             Sincerely, 
             
-            Team Local Karobar `,
-            //html : '<h1> Hello you have email from LocalKarobar</h1>',
+            Team SoulSpeak. `,
           };
 
         transporter.sendMail(mailOptions, (error) => {
@@ -163,4 +163,5 @@ router.get("/userDashboard", authenticateUser, async(req, res) => {
     const myDoctor = await DOCTOR.findById({_id: user.preferred_therapist})
     res.status(200).json({Doctor:myDoctor})
 })
+router.get("/logout", logout)
 module.exports = router;

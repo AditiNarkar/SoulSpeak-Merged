@@ -38,7 +38,7 @@ const DoctorDashboard = () => {
     <div className="w-full relative [background:linear-gradient(121.5deg,_#eed8ec_23.42%,_#a8edea)] h-[750px] overflow-hidden text-left text-xl text-rosybrown font-inter">
       <Navbar logIn="Logout" />
       <b className="absolute top-[103px] left-[90px] text-13xl flex items-center w-[785px] h-[30px]">
-        Hello Dr. {doctor.name}
+        Hello {doctor.name}
       </b>
       <b className="absolute top-[157px] left-[91px] flex items-center w-[770px] h-[30px]">
         Dashboard

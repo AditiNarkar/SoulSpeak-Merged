@@ -55,16 +55,17 @@ const DoctorSendMessage = () => {
     //alert("hi")
     e.preventDefault()
 
-    const URL = "http://localhost:5000/api/sendMail"
+    const mailURL = "http://localhost:5000/api/sendMail"
 
     const {
       from, to, subject, negative, positive, comments
     } = doctor;
 
-    const response = await fetch(URL, {
+    const response = await fetch(mailURL, {
       method:"POST",
       headers: {
-        "Content-Type" : "application/json"
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         from, to, subject, negative, positive, comments
@@ -74,7 +75,7 @@ const DoctorSendMessage = () => {
     const data = await response.json()
     if(data.status == 201){
       alert(data.msg)
-      window.location.href="http://localhost:3000/login"
+      //window.location.href="http://localhost:3000/login"
     }   
     else{
       alert(data.msg)
@@ -158,10 +159,10 @@ const DoctorSendMessage = () => {
             Send Mail
           </b>
           <div className="w-[1054px] bg-gray-200 h-[90px] overflow-hidden shrink-0 flex flex-col items-start justify-center">
-            <b className="w-[140px] relative flex items-center h-[30px] shrink-0">
+            <b className="w-[20px] relative flex items-center h-[30px] shrink-0">
               From
             </b>
-            <div className="w-[1010px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" >{root.email}</div>
+            <div name = "from"className="w-[1010px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" >{root.email}</div>
           </div>
           <div className="w-[1054px] bg-gray-200 h-[90px] overflow-hidden shrink-0 flex flex-col items-start justify-center">
             <b className="w-[140px] relative flex items-center h-[30px] shrink-0">
@@ -173,23 +174,23 @@ const DoctorSendMessage = () => {
             <b className="w-[140px] relative flex items-center h-[30px] shrink-0">
               Subject
             </b>
-            <input className="w-[1010px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" />
+            <input name = "subject" onChange={handleInputs} className="w-[1010px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" />
           </div>
           <div className="w-[1054px] bg-gray-200 h-[90px] overflow-hidden shrink-0 flex flex-col items-start justify-center">
             <b className="w-[200px] relative flex items-center h-[30px] shrink-0">{`Negative Comments `}</b>
-            <input className="w-[1010px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" />
+            <input name = "negative" onChange={handleInputs} className="w-[1010px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" />
           </div>
           <div className="w-[1054px] bg-gray-200 h-[90px] overflow-hidden shrink-0 flex flex-col items-start justify-center">
             <b className="w-[200px] relative flex whitespace-pre-wrap items-center h-[30px] shrink-0">{`Positive  Comments `}</b>
-            <input className="w-[1010px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" />
+            <input name = "positive" onChange={handleInputs} className="w-[1010px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" />
           </div>
           <div className="w-[1054px] bg-gray-200 h-[90px] overflow-hidden shrink-0 flex flex-col items-start justify-center">
             <b className="w-[140px] relative flex items-center h-[30px] shrink-0">
               Comments
             </b>
-            <input className="w-[1010px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" />
+            <input name = "comments" onChange={handleInputs} className="w-[1010px] relative rounded-31xl bg-white h-10 overflow-hidden shrink-0" />
           </div>
-          <button className="cursor-pointer [border:none] py-[11px] px-[43px] bg-rosybrown rounded-21xl overflow-hidden flex flex-row items-center justify-center">
+          <button onClick={postData}className="cursor-pointer [border:none] py-[11px] px-[43px] bg-rosybrown rounded-21xl overflow-hidden flex flex-row items-center justify-center">
             <b className="relative text-xl font-inter text-plum text-center">
               Send
             </b>
