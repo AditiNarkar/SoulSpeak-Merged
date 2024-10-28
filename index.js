@@ -1,5 +1,6 @@
 const express = require('express')
 const userRoutes = require('./routes/usercontroller')
+const cors = require('cors')
 
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -16,6 +17,12 @@ app.use(cors({
     credentials: true
 }))
 app.use(cookieParser())
+
+app.use(cors({
+    origin:"http://localhost:3000",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true
+}))
 
 const connectDB = require('./config/db.js')
 connectDB()

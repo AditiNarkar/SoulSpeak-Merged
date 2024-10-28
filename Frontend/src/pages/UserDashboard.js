@@ -1,4 +1,5 @@
 import Navbar1 from "../components/Navbar1";
+import { ChatEngine } from 'react-chat-engine'
 
 const UserDashboard = () => {
   return (
@@ -43,35 +44,12 @@ const UserDashboard = () => {
           </button>
         </div>
         <div className="w-[506px] bg-gray-100 h-[501px] overflow-hidden shrink-0 flex flex-col items-center justify-start">
-          <b className="w-[346px] relative flex items-center justify-center h-[58px] shrink-0">{`Support Group Expressions `}</b>
-          <div className="w-[445px] h-[395px] overflow-auto shrink-0 flex flex-col items-center justify-start py-2.5 px-0 box-border gap-[16px] text-left text-sm">
-            <div className="w-[408px] bg-gray-200 overflow-hidden flex flex-col items-start justify-center">
-              <div className="w-[30px] relative rounded-[50%] bg-gainsboro h-[30px]" />
-              <div className="w-[294px] relative flex items-center">
-                bleh bleh
-              </div>
-            </div>
-            <div className="w-[408px] bg-gray-200 overflow-hidden flex flex-col items-start justify-center">
-              <div className="w-[30px] relative rounded-[50%] bg-gainsboro h-[30px]" />
-              <div className="w-[294px] relative flex items-center">
-                bleh bleh
-              </div>
-            </div>
-            <div className="w-[408px] bg-gray-200 overflow-hidden flex flex-col items-start justify-center">
-              <div className="w-[30px] relative rounded-[50%] bg-gainsboro h-[30px]" />
-              <div className="w-[294px] relative flex items-center">
-                bleh bleh
-              </div>
-            </div>
-          </div>
-          <div className="w-[447px] h-9 overflow-hidden shrink-0 flex flex-row items-start justify-center gap-[11px]">
-            <textarea className="max-w-[330px] relative rounded-11xl bg-white max-h-[30px] overflow-hidden shrink-0" />
-            <button className="cursor-pointer [border:none] py-[11px] px-[43px] bg-rosybrown w-[93px] rounded-21xl h-[35px] overflow-hidden shrink-0 flex flex-row items-center justify-center box-border">
-              <b className="relative text-xl font-inter text-plum text-center">
-                Post
-              </b>
-            </button>
-          </div>
+        <ChatEngine style='color:black'
+			projectID='7b3c3a98-d74a-4194-bf8b-9234aae704ca'
+			userName= 'Aarya'/*Manas Aarya Adam Tufayl Aditi Soul*/ 
+			userSecret= 'project' /* messi project socceer aditi tufayl watch*/
+		/>
+
         </div>
         <div className="overflow-hidden flex flex-col items-start justify-start gap-[10px]">
           <div onClick={()=> window.location.href="http://localhost:3000/userjournal"} className=" hover:bg-rosybrown hover:text-plum hover:cursor-pointer bg-plum h-[123px] overflow-hidden shrink-0 flex flex-col items-center justify-center py-[51px] px-[29px] box-border">

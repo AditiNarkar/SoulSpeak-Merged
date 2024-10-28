@@ -44,11 +44,15 @@ router.get("/registerUser", async(req, res) => {
       }
 })
 router.post("/registerUser", registerUser )
+
 router.post("/registerDoctor", registerDoctor )
+
 router.post("/login", login)
+
 router.get("/showDocProfile", authenticateDoctor, async(req, res) => {
     res.status(200).json({rootUser:req.rootUser})
 })
+
 router.get("/myPatientProfile", authenticateDoctor, async(req, res) => {
     //res.status(200).json({rootUser:req.rootUser})
     try {
